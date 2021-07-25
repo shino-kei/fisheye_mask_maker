@@ -4,6 +4,7 @@
 import cv2
 import CircleFitting as cf
 import numpy as np
+import argparse
 
 
 class Circle(object):
@@ -94,8 +95,12 @@ class mask_maker(object):
 
 
 if __name__ == '__main__':
-    img_in = "./sample/fisheye.jpg"
-    img_out = "./sample/mask.png"
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input", help="input image path")
+    parser.add_argument("--output", default="mask.png", help="output mask image path")
+    args = parser.parse_args()
 
+    img_in = args.input
+    img_out = args.output
     m = mask_maker(img_in, img_out)
     m.draw_gui()
